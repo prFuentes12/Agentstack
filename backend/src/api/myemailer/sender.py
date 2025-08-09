@@ -3,19 +3,24 @@ import smtplib
 from email.message import EmailMessage
 
 
-EMAIL_ADDRES=os.environ.get("EMAIL_ADDRES")
-EMAIL_PASSWORD=os.environ.get("EMAIL_PASSWORD")
-EMAIL_HOST=os.environ.get("EMAIL_HOST") or "smtp.gmail.com"
-EMAIL_PORT=os.environ.get("EMAIL_PORT") or 465
+EMAIL_ADDRESS = os.environ.get("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.environ.get("EMAIL_PASSWORD")
+EMAIL_HOST = os.environ.get("EMAIL_HOST") or "smtp.gmail.com"
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT") or 465)
 
 def send_mail(subject: str= "No subject provided", content: str= "No message provided", 
-              to_email: str=EMAIL_ADDRES , from_email:str=EMAIL_ADDRES):
+              to_email: str=EMAIL_ADDRESS , from_email:str=EMAIL_ADDRESS):
+    print(EMAIL_ADDRESS)
+    print(EMAIL_PASSWORD)
+    print(EMAIL_HOST)
+    print(EMAIL_PORT)
     msg = EmailMessage()
     msg ["Subject"] = subject
     msg ["From"] = from_email
     msg ["To"] = to_email
     msg.set_content(content)
+    print(msg)
     with smtplib.SMTP_SSL(EMAIL_HOST, EMAIL_PORT) as smtp:
-        smtp.login(EMAIL_ADDRES, EMAIL_PASSWORD)
+        smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         return smtp.send_message(msg)
      
