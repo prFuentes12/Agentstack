@@ -1,5 +1,5 @@
 # assistants.py
-from langchain_core.messages import SystemMessage, HumanMessage, AIMessage, ToolMessage
+from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage
 from api.ai.llms import get_openai_llm
 from api.ai.tools import send_me_email, get_unread_emails
 
@@ -36,7 +36,8 @@ def email_assistant(query: str):
         if not tool:
             continue
         result = tool.invoke(args)  # las @tool de LangChain exponen .invoke
-        messages.append(result)
+        messages.append(ToolMessage(content=str(result), tool_call_id=tc["id"]))
+
     print(messages)
     # Segunda pasada ya con observaciones
     final = llm.invoke(messages)
