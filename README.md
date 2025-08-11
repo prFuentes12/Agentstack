@@ -31,6 +31,3 @@ Built with **FastAPI**, **LangGraph**, and **OpenAI API**, integrated with real 
 - **Docker-ready**
 - **Extensible**: possible RAG integration (FAISS/ChromaDB) for knowledge-base search.
 - **Database integration** for caching responses and logging metrics.
-
-
-## 📂 Estructura del proyecto
